@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+   
+   
+  
+    <button onclick="sumaPares();">Suma pares</button>
+
+<script>
+    //suma de pares
+    function sumaPares(){
+        let n1=prompt("Introduce un número: ");
+        let n2=prompt("Introduce un segundo número: ");
+        let resultado=0;
+        let mayor, menor;
+        if (n1>n2){
+            mayor=n1
+            menor=n2
+        }else{
+            mayor=n2
+            menor=n1
+        }
+        for(let i=menor; i<=mayor; i++){
+            
+            if(i%2==0){
+                resultado=resultado+i
+            }
+
+        }
+        alert("La suma es: "+resultado);
+
+
+    }
+
+</script>
+</body>
+</html>
