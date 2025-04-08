@@ -33,27 +33,23 @@
                      document.getElementById("nombre").value="";
                 }else{
                     alert("No añadido, el contacto ya existe");
-                     document.getElementById("nombre").value="";
+                    
                 }
-
                 
-            
-            
+   
         }
 
         function mostrar(){
             //va a recorrer el for y va metiendolo en esta variable html
             let html="";
             for (let n of nombres){
-                html=html+"<b>"+n+"</b><br>";
+                html=html+"<b>"+n+"</b><img src='papelera-de-reciclaje.png' height='15px' weight='15px'><br>";
                 //es igual a lo siguiente
                 //html+="<b>"+n+"</b><br>";
                 
             }
             document.getElementById("listaNombres").innerHTML=html;
         }
-
-
 
     </script>
 
