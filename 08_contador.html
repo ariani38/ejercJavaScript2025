@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        #limite {
+            padding: 10px;
+            font-size: 16px;
+            width: 100px;
+            margin-bottom: 20px;
+        }
+
+        #result {
+            margin-top: 20px;
+            font-size: 24px;
+            font-weight: bold;
+            color: #f763c9;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #00b3aa;
+        }
+    </style>
+</head>
+<body>
+    <label for="limite">Límite:</label>
+     <input  id="limite" type="number">
+    <div id="result"></div>
+    <button onclick="contador();">Contar </button>
+    
+
+
+    <script>
+        let n=0;
+        //para definir el sentido de la cuenta
+        let ascendente=true;
+        function contador(){
+        let limiteInferior=0;
+         limiteSuperior=document.getElementById("limite").value;
+         
+           if(ascendente==true){
+            //si es ascendente sumamos, si no restamos.
+                  if(n<limiteSuperior){
+                     n++;
+                  }  else {
+                        n--;
+                        ascendente=false;
+                     }  
+            }else{
+                if(n>limiteInferior){
+                    n--;
+                }else{
+                    n++;
+                    ascendente=true;
+                }
+            }
+       
+ document.getElementById("result").innerHTML=`<h1>${n}</h1></b>`;
+          console.log(n);
+        }
+
+    </script>
+</body>
+</html>

@@ -42,13 +42,28 @@
         function mostrar(){
             //va a recorrer el for y va metiendolo en esta variable html
             let html="";
-            for (let n of nombres){
-                html=html+"<b>"+n+"</b><img src='papelera-de-reciclaje.png' height='15px' weight='15px'><br>";
+            //for (let n of nombres){
+               // html=html+"<b>"+n+"</b><a onclick='borrar();'<img src='papelera-de-reciclaje.png' height='15px' weight='15px'><br>";
                 //es igual a lo siguiente
                 //html+="<b>"+n+"</b><br>";
-                
+                 
+            /*
+            for(let n of nombres){
+                html=html+"<b>"+n+"</b><a onclick='borrar();'><img src='papelera.png' height='20px' width='20px'></a><br>";
+            }*/
+            for(let i=0;i<nombres.length;i++){
+               // html=html+"<b>"+nombres[i]+"</b><a onclick='borrar("+i+");'><img src='papelera-de-reciclaje.png' height='20px' width='20px'></a><br>";
+               html=html+`<b>${nombres[i]}</b><a onclick='borrar(${i});'><img src='papelera-de-reciclaje.png' height='20px' width='20px'></a><br>`;
             }
             document.getElementById("listaNombres").innerHTML=html;
+        }
+            
+         
+
+        function borrar(pos){
+            nombres.splice(pos,1);
+            mostrar();
+
         }
 
     </script>
