@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diseño Kawaii</title>
+    <style>
+        body {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            background-color: #ffe4e1; /* Fondo rosa pastel */
+            color: #ff69b4; /* Texto rosa fuerte */
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        button {
+            background-color: #ffb6c1; /* Rosa pastel */
+            color: white;
+            font-size: 18px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s, background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #ff69b4; /* Rosa fuerte */
+            transform: scale(1.1); /* Efecto de agrandamiento */
+        }
+
+        #resultado {
+            margin-top: 20px;
+            font-size: 20px;
+            font-weight: bold;
+            color: #ff1493; /* Rosa intenso */
+        }
+
+        .container {
+            background-color: #fffaf0; /* Fondo crema */
+            border: 2px solid #ffb6c1; /* Borde rosa pastel */
+            border-radius: 15px;
+            padding: 20px;
+            display: inline-block;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>¿Hasta qué número hay que sumar para llegar a 1000?</h1>
+        <p>Comenzando por 1</p>
+        <button onclick="calcular();">Responder</button>
+        <div id="resultado"></div>
+    </div>
+    
+    
+   
+
+<script>
+    function calcular(){
+            let suma=0;
+            let contador=1;
+
+            while(suma<1000){
+            suma=suma+contador;
+            contador=contador+1;
+            }
+            console.log(contador);
+            document.getElementById("resultado").innerHTML="Debemos contar hasta: "+contador;
+
+    }
+
+
+</script>
+</body>
+</html>
