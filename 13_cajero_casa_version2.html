@@ -14,8 +14,11 @@
             padding: 0;
             display: flex;
             justify-content: center;
-            align-items: center;
-            height: 100vh;
+            align-items: flex-start;
+            /* Cambiado de center a flex-start */
+            min-height: 100vh;
+            /* Cambiado de height a min-height */
+            overflow-y: auto;
         }
 
         .container {
@@ -26,6 +29,8 @@
             max-width: 400px;
             width: 100%;
             text-align: center;
+            margin-top: 20px; /* Añadir espacio superior */
+            margin-bottom: 20px;
         }
 
         h1 {
@@ -58,30 +63,34 @@
         }
 
         button:nth-child(1) {
-            background-color: #4CAF50; /* Verde */
+            background-color: #4CAF50;
+            /* Verde */
         }
 
         button:nth-child(2) {
-            background-color: #f44336; /* Rojo */
+            background-color: #f44336;
+            /* Rojo */
         }
 
         button:nth-child(3) {
-            background-color: #2196F3; /* Azul */
+            background-color: #2196F3;
+            /* Azul */
         }
 
-        #saldo, #totales {
+        #saldo,
+        #totales {
             margin-top: 20px;
             text-align: right;
             font-size: 18px;
             color: #1e1846;
         }
+
         #movimientos {
             margin-top: 20px;
             text-align: left;
             font-size: 18px;
             color: #2b2a2f;
         }
-
     </style>
 </head>
 
@@ -104,18 +113,13 @@
     </div>
 
 
-
-    
-     
-
-
     <script>
 
         let saldoActualizado = 0;
         let arrayMovimientos = [];
         totalIngresos = 0;
         totalExtracciones = 0;
-     
+
         function guardar() {
 
             let saldoInicial = 0;
@@ -125,20 +129,18 @@
         }
 
         function ingresar() {
-                       
+
             let cantidadIngresar = parseInt(document.getElementById("cantidad").value) || 0;
 
             saldoActualizado = saldoActualizado + cantidadIngresar;
 
-            totalIngresos=totalIngresos+cantidadIngresar;
+            totalIngresos = totalIngresos + cantidadIngresar;
 
-            
+
             console.log("saldo actualizado", saldoActualizado);
 
             arrayMovimientos.push("Ingreso: " + cantidadIngresar);
             console.log(arrayMovimientos)
-
-
 
         }
 
@@ -151,19 +153,19 @@
                 alert("Saldo insuficiente para realizar esa extracción");
             }
 
-           totalExtracciones=totalExtracciones+extraccion;
+            totalExtracciones = totalExtracciones + extraccion;
 
 
             console.log("saldo actualizado:", saldoActualizado);
-            arrayMovimientos.push("Extración: "+ extraccion);
+            arrayMovimientos.push("Extración: " + extraccion);
             console.log(arrayMovimientos);
         }
 
 
         function mostrar() {
             document.getElementById("saldo").innerHTML = "Saldo Actual: " + saldoActualizado;
-            document.getElementById("totales").innerHTML= `Total Ingresos: ${totalIngresos} <br> Total Extracciones: ${totalExtracciones} `
-           
+            document.getElementById("totales").innerHTML = `Total Ingresos: ${totalIngresos} <br> Total Extracciones: ${totalExtracciones} `
+
             html = "";
             for (let n of arrayMovimientos) {
                 html += n + "<br>";
@@ -172,7 +174,6 @@
             document.getElementById("movimientos").innerHTML = `Movimientos: <br>  ${html}`;
 
         }
-
 
 
     </script>

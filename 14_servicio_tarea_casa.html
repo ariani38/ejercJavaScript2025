@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Servicio de Tareas</title>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Gestion de Tareas</h1>
+        <h2>Agregar Tarea nueva/ Modificar Tarea</h2>
+        Id Tarea:    <input type="number" id="id"><br><br>
+        Título:      <input type="text" id="titulo"><br><br>
+        Descripción: <input type="text" id="descripcion"><br><br>
+        Estado:      <select id="estado">
+            
+            <option value="planificacion">Planificación</option>
+            <option value="enProceso" selected>En proceso</option>
+            <option value="realizada">Realizada</option>
+          </select><br><br>
+        Prioridad:       <select id="prioridad">
+                        <option value="baja">Baja</option>
+                        <option value="media" selected>Media</option>
+                        <option value="alta">Alta</option>   
+                    </select>
+        <br><br>
+        Fecha:       <input type="date" id="fecha"><br><br><br>
+        <button onclick="anadirTarea();">Agregar nueva Tarea</button> <button onclick="actualizarTarea();">Actualizar
+            Tarea</button>
+
+        <br><br>
+        <h2>Modificar/Ver Tareas</h2>
+        Ver todas las tareas <button onclick="verTodas();">Visualizar</button>
+        <div id="todasTareas"></div>
+        <button onclick="tareaPrioridad();">Buscar por Prioridad</button><input type="text" id="buscPrior">
+        <div id="verPrioridad"></div>
+        <button onclick="tareaEstado();">Buscar por Estado</button><input type="text" id="buscEstado">
+        <div id="verEstado"></div>
+        Eliminar tarea <input type="number" id="idEliminar"><button onclick="eliminar();">Eliminar</button>
+
+
+    </div>
+
+    <script>
+
+
+        class Tarea {
+            constructor(id, titulo, descripcion, estado, prioridad, fecha) {
+                this.id = id;
+                this.titulo = titulo;
+                this.descripcion = descripcion;
+                this.estado = estado;
+                this.prioridad = prioridad;
+                this.fecha = new Date(fecha);
+            }
+
+            obtenerId() {
+                return this.id;
+            }
+            obtenerTitulo() {
+                return this.titulo;
+            }
+            obtenerDescripcion() {
+                return this.descripcion;
+            }
+            obtenerEstado() {
+                return this.estado;
+            }
+            obtenerPrioridad() {
+                return this.prioridad;
+            }
+            obtenerFecha() {
+                return this.fecha;
+            }
+            actualizar({ id, titulo, descripcion, estado, prioridad, fecha }) {
+                if (id) this.id = id;
+                if (titulo) this.titulo = titulo;
+                if (descripcion) this.descripcion = descripcion;
+                if (estado) this.estado = estado;
+                if (prioridad) this.prioridad = prioridad;
+                if (fecha) this.fecha = fecha;
+            }
+
+            mostrar() {
+                return `ID: ${this.id} <br> Título: ${this.titulo} <br> Descripción: ${this.descripcion} <br> Estado: ${this.estado} <br> Prioridad: ${this.prioridad} <br> Fecha: ${this.fecha}`;
+            }
+
+        }
+
+        class Gestion {
+            constructor() {
+                this.tareas = [];
+            }
+            anadirTarea() {
+
+                let id = document.getElementById("id").value;
+                let titulo = document.getElementById("titulo").value;
+                let descripcion = document.getElementById("descripcion").value;
+                let estado = document.getElementById("estado").value;
+                let prioridad = document.getElementById("prioridad").value;
+                let fecha = document.getElementById("fecha").value;
+                let tarea = new Tarea(id, titulo, descripcion, estado, prioridad, fecha);
+                this.tareas.push(tarea);
+                console.log(tarea);
+                console.log(this.tareas);
+            }
+            verTodas() {
+                //aqui usando for
+                let html = "";
+                for (let n of this.tareas) {
+                    html += "*" + n.mostrar() + "<br><br><br>";
+                }
+                document.getElementById("todasTareas").innerHTML = `Todas las tareas:<br>  ${html}`;
+            }
+            actualizarTarea() {
+                let id = document.getElementById("id").value;
+                let titulo = document.getElementById("titulo").value;
+                let descripcion = document.getElementById("descripcion").value;
+                let estado = document.getElementById("estado").value;
+                let prioridad = document.getElementById("prioridad").value;
+                let fecha = document.getElementById("fecha").value;
+
+                // Buscar la tarea por ID
+                let tarea = this.tareas.find(t => t.id == id);
+
+                if (tarea) {
+                    tarea.actualizar({
+                        //no incluir el id, para que no lo actualice
+                        titulo,
+                        descripcion,
+                        estado,
+                        prioridad,
+                        fecha
+                    });
+                    alert("Tarea actualizada correctamente.");
+                } else {
+                    alert("Tarea no encontrada con ese ID.");
+                }
+            }
+            tareaPrioridad() {
+                 
+                let prioridadTareas = document.getElementById("buscPrior").value;
+                let html = "";
+               let tareasFiltradas = this.tareas.filter(t => t.prioridad === prioridadTareas); 
+               if(tareasFiltradas.length>0){
+                for(let n of tareasFiltradas ){
+                    html += "*" + n.mostrar() + "<br><br><br>";  
+                }                
+                }else{
+                        html = "No se encontraron tareas con esa prioridad.";
+                }              
+                document.getElementById("verPrioridad").innerHTML = `Todas las tareas por prioridad:<br>  ${html}`;
+                }
+            tareaEstado(){
+                let estadoTareas = document.getElementById("buscEstado").value;
+                let html = "";
+               let tareasFiltradas = this.tareas.filter(t => t.estado === estadoTareas); 
+               if(tareasFiltradas.length>0){
+                for(let n of tareasFiltradas ){
+                    html += "*" + n.mostrar() + "<br><br><br>";  
+                }                
+                }else{
+                        html = "No se encontraron tareas con ese estado.";
+                }              
+                document.getElementById("verEstado").innerHTML = `Todas las tareas por estado:<br>  ${html}`;
+             
+            }
+            eliminar() {
+    let idEliminar = document.getElementById("idEliminar").value;
+    let tareasAntes = this.tareas.length;
+
+    this.tareas = this.tareas.filter(t => t.id != idEliminar);
+
+    if (this.tareas.length < tareasAntes) {
+        alert("Tarea eliminada correctamente.");
+    } else {
+        alert("No se ha encontrado ninguna tarea con ese ID.");
+    }
+}
+           
+
+        }
+        const gestor = new Gestion();
+        function anadirTarea() {
+            gestor.anadirTarea();
+        }
+        function verTodas() {
+            gestor.verTodas();
+        }
+        function actualizarTarea() {
+            gestor.actualizarTarea();
+        }
+        function tareaPrioridad(){
+            gestor.tareaPrioridad();
+        }
+        function tareaEstado(){
+            gestor.tareaEstado();
+        }
+        function eliminar(){
+            gestor.eliminar();
+        }
+
+
+    </script>
+
+
+
+</body>
+
+</html>
