@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f8fb;
+            color: #1e4d35;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            /* Cambiado de center a flex-start */
+            min-height: 100vh;
+            /* Cambiado de height a min-height */
+            overflow-y: auto;
+        }
+
+        .container {
+            background: #8e8a8a;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(157, 51, 51, 0.2);
+            padding: 20px;
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+            margin-top: 20px; /* Añadir espacio superior */
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            color: #347836;
+            margin-bottom: 20px;
+        }
+
+        input[type="number"] {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #b4aaaa;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        button {
+            width: 48%;
+            padding: 10px;
+            margin: 5px 1%;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            color: rgb(9, 7, 99);
+        }
+
+        button:hover {
+            opacity: 0.9;
+        }
+
+        button:nth-child(1) {
+            background-color: #4CAF50;
+            /* Verde */
+        }
+
+        button:nth-child(2) {
+            background-color: #f44336;
+            /* Rojo */
+        }
+
+        button:nth-child(3) {
+            background-color: #2196F3;
+            /* Azul */
+        }
+
+        #saldo,
+        #totales {
+            margin-top: 20px;
+            text-align: right;
+            font-size: 18px;
+            color: #1e1846;
+        }
+
+        #movimientos {
+            margin-top: 20px;
+            text-align: left;
+            font-size: 18px;
+            color: #2b2a2f;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Cajero Automático</h1>
+        <label for="saldoInicial">Saldo Inicial:</label>
+        <input type="number" id="saldoInicial"><br>
+        <button onclick="guardar();">Guardar</button>
+        <hr>
+        <label for="cantidad">Cantidad:</label>
+        <input type="number" id="cantidad"><br>
+        <button onclick="ingresar();">Ingresar</button>
+        <button onclick="extraer();">Extracción</button>
+        <hr>
+        <button onclick="mostrar();">Saldo y movimientos</button>
+        <div id="saldo"></div>
+        <div id="totales"></div>
+        <div id="movimientos"></div>
+    </div>
+
+
+    <script>
+
+        let saldoActualizado = 0;
+        let arrayMovimientos = [];
+        totalIngresos = 0;
+        totalExtracciones = 0;
+
+        function guardar() {
+
+            let saldoInicial = 0;
+            saldoInicial = parseInt(document.getElementById("saldoInicial").value) || 0;
+            console.log("saldo inicial guardado", saldoInicial);
+            saldoActualizado = saldoInicial;
+        }
+
+        function ingresar() {
+
+            let cantidadIngresar = parseInt(document.getElementById("cantidad").value) || 0;
+
+            saldoActualizado = saldoActualizado + cantidadIngresar;
+
+            totalIngresos = totalIngresos + cantidadIngresar;
+
+
+            console.log("saldo actualizado", saldoActualizado);
+
+            arrayMovimientos.push("Ingreso: " + cantidadIngresar);
+            console.log(arrayMovimientos)
+
+        }
+
+        function extraer() {
+            let extraccion = parseInt(document.getElementById("cantidad").value) || 0;
+
+            if (saldoActualizado >= extraccion) {
+                saldoActualizado = saldoActualizado - extraccion;
+            } else {
+                alert("Saldo insuficiente para realizar esa extracción");
+            }
+
+            totalExtracciones = totalExtracciones + extraccion;
+
+
+            console.log("saldo actualizado:", saldoActualizado);
+            arrayMovimientos.push("Extración: " + extraccion);
+            console.log(arrayMovimientos);
+        }
+
+
+        function mostrar() {
+            document.getElementById("saldo").innerHTML = "Saldo Actual: " + saldoActualizado;
+            document.getElementById("totales").innerHTML = `Total Ingresos: ${totalIngresos} <br> Total Extracciones: ${totalExtracciones} `
+
+            html = "";
+            for (let n of arrayMovimientos) {
+                html += n + "<br>";
+            }
+
+            document.getElementById("movimientos").innerHTML = `Movimientos: <br>  ${html}`;
+
+        }
+
+
+    </script>
+
+</body>
+
+</html>
