@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+
+
+<script>
+    let numeros=[2,4,5,6,7,9,-3];
+    //indicar si existe al menos un numero  negativo en este programa
+    //aqui se utiliza la funcion some, que da un boolean 
+  let indicador= numeros.some(function(n){
+    return n<0;
+   }
+);
+   
+    /*let indicador=false;
+    for(let n of numeros){
+        if(n<0){
+            indicador=true;
+        }
+    }*/
+
+    if (indicador==true){
+        console.log("si hay negativos")
+    }else{
+        console.log("no hay negativos")
+    }
+
+
+    //crear un nuevo array de números pares usando el método filter
+    //el filter filtra y crea un nuevo array con los que cumplen la condición
+    let pares=numeros.filter(function(n){
+        return n%2==0;
+    });
+    console.log(pares);
+
+    //aplicar el forEach no devuelve nada, es void.
+    //solo aplica a cada elemento y ya
+    numeros.forEach(function(n){
+        console.log(n);
+    });
+
+    //imprimir solo los numeros negativos, sin meter en nuevas variables
+    //ni utilizar for
+    numeros.filter(function(n){
+        return n<0;
+    }).forEach(function(n){
+        console.log(n)
+    });
+
+</script>
+
+</body>
+</html>

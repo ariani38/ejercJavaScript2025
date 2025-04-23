@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body onload="cargarCiudades();">
+    <select id="ciudades">
+         
+    </select>
+    <button onclick="ver();">ver seleccionado</button>
+    <div id="poblacion"></div>
+
+    <script>
+        let ciudades=[{ciudad:"Cáceres",poblacion:120000},
+                      {ciudad:"Zaragoza",poblacion:680000},
+                      {ciudad:"Ávila",poblacion:57000},
+                      {ciudad:"Córdoba",poblacion:720000}];
+
+          function ver(){
+            let valor=document.getElementById("ciudades").value;
+            document.getElementById("poblacion").innerHTML=valor;
+            }
+            console.log(valor);
+          
+
+    //se encarga de generar dinamicamente el contenido del select 
+    //a partir del array de ciudades
+    //con la etiqueta onload en el body llamamos a esta función
+        function cargarCiudades(){
+            let html="";
+            for (let c of ciudades){
+                html=html+`<option value="${c.poblacion}"> ${c.ciudad} </option>`;
+                }
+            document.getElementById("ciudades").innerHTML=html;
+        }
+      
+        
+    </script>
+</body>
+</html> 

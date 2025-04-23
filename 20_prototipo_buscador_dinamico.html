@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buscador</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #c8c8c8;
+            color: #ffffff;
+            text-align: center;
+            padding: 50px;
+        }
+
+        table {
+            margin: 20px auto;
+            border-collapse: collapse;
+            width: 80%;
+            max-width: 600px;
+        }
+
+        th {
+            color: azure;
+            background-color: rgb(166, 173, 171);
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+
+        td {
+            background-color: rgb(235, 235, 235);
+            color: rgb(93, 92, 92);
+            text-align: center;
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+
+        input, select {
+            padding: 10px;
+            font-size: 16px;
+            border: 2px solid #fbfbfb;
+            border-radius: 5px;
+            background-color: #6e6e6e;
+            color: #ffffff;
+            outline: none;
+            margin: 10px 0;
+        }
+
+        input:focus, select:focus {
+            box-shadow: 0 0 10px #5b6462;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #5c7e77;
+            color: #121212;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.3s;
+        }
+
+        button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 15px #8aa8a2;
+        }
+
+        #result {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #00ffcc;
+        }
+    </style>
+</head>
+
+<body onload="cargarTematica();">
+
+    <h1 style="font-size: 2rem; color: #3f3636; background-color: #72968f; padding: 10px; border-radius: 10px; display: inline-block;">Buscador de direcciones Web</h1>
+    <p style="font-size: 1.2rem; margin: 20px 0;">Introduce una temática para buscar:</p>
+
+    <select id="tematica" style="width: 50%;">
+       
+
+    </select>
+
+    <button onclick="buscar();">Buscar</button>
+    <table id="result"></table>
+
+    <script>
+
+        let datos = [
+            { "tematica": "deportes", "direccion": "http://www.marca.es" },
+            { "tematica": "libros", "direccion": "http://www.puntolibro.es" },
+            { "tematica": "deportes", "direccion": "http://www.todofutbol.com" },
+            { "tematica": "libros", "direccion": "http://www.fnac.es" },
+            { "tematica": "cocina", "direccion": "http://www.fogones.es" },
+            { "tematica": "juegos", "direccion": "http://www.game.es" }
+        ];
+
+        function cargarTematica() {
+            let tematicas = [];
+            let html = "";
+           tematicas.push("Todos");
+            for (let t of datos) {
+                tematicas.push(t.tematica);
+            }
+            let conjunto = new Set(tematicas);
+            for (let n of conjunto) {
+                html = html  +`<option value="${n}"> ${n} </option>`;
+            }
+            document.getElementById("tematica").innerHTML = html;
+        }
+
+
+        function buscar() {
+            //recorremos el array de datos y buscamos el json que pertenezca 
+            let resultados = [];
+            let tematica = document.getElementById("tematica").value;
+            tematica = tematica.toLowerCase();
+            for (let r of datos) {
+                if (r.tematica == tematica ) {
+                    resultados.push(r);
+                }
+            }
+            //volcar el array de direcciones en la tabla
+            let html = "<tr><th>Temática</th><th>Dirección</th></tr>";
+            for (let d of resultados) {
+                html = html + `<tr><td>${d.tematica}</td><td>${d.direccion}</td></tr>`;
+              
+            }
+            document.getElementById("result").innerHTML = html;
+        }
+        
+         
+    </script>
+</body>
+
+</html>
