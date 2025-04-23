@@ -4,15 +4,97 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            color: #807d7d;
+            margin: 0;
+            padding: 20px;
+        }
 
+        h1 {
+            text-align: center;
+            color: #3e4d3e;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #585f58;
+            color: white;
+            font-weight: bold;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        td img {
+            cursor: pointer;
+        }
+
+        button {
+            background-color: #939593;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        button:hover {
+            background-color: #898c89;
+        }
+
+        #verCarrito {
+            display: block;
+            margin: 20px auto;
+            background-color: #8a8a8a;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        #verCarrito:hover {
+            background-color: #e0dbc9;
+        }
+        div {
+            text-align: center;
+            color: #333833;
+            font-size: 20px
+        }
+    </style>
 </head>
 <body>
     
-    <h1>Bodega</h1>
+    <h1>Catálogo de Productos</h1>
     <table id="tablaProductos"></table>
 
-    <button id="verCarrito">Carrito</button>
-    <table id="carrito"></table>
+    <button id="verCarrito"> Ver Carrito</button>
+    <table id="carritoCompra"></table>
+    <div id="totalCompras"></div>
 
 
     <script>
@@ -26,21 +108,61 @@
     ]; 
 
         let carrito=[];
+        let totalDinero=0;
 
     document.addEventListener("DOMContentLoaded", function(){
-        let html = "<tr><th>Producto</th><th>Categoria</th><th>Precio</th><th></th></tr>";
+        let html = "<tr><th>Producto</th><th>Categoria</th><th>Precio</th><th>Agregar</th></tr>";
         catalogo.forEach((r)=> 
-             html = html + `<tr><td>${r.producto}</td><td>${r.categoria}</td><td>${r.precio}</td><td><button onclick='agregar(${r}')>Agregar</button></td></tr>`);
+             html = html + `<tr><td>${r.producto}</td><td>${r.categoria}</td><td>${r.precio}</td><td><button onclick="agregar(${catalogo.indexOf(r)})">Agregar</button></td></tr>`);
             
 
             document.getElementById("tablaProductos").innerHTML = html;
-
-
         }
+       );
+       function agregar(indice){
+       
+       let elegido=catalogo[indice];
+       carrito.push(elegido);
+        console.log( "producto elegido", elegido);
+        console.log("carrito", carrito);
 
-      
-    
-    );
+           }
+         //al hacer clic en el boton ver se muestra la tabla del carrito
+        let botonVer=document.getElementById("verCarrito");
+
+         botonVer.addEventListener("click",function(){
+         let html = "<tr><th>Producto</th><th>Categoria</th><th>Precio</th><th>Borrar</th></tr>"; 
+         carrito.forEach((n)=> 
+         html = html + `<tr><td>${n.producto}</td><td>${n.categoria}</td><td>${n.precio}</td><td><button onclick="borrar(${carrito.indexOf(n)})"><img src='papelera-de-reciclaje.png' height='20px' width='20px'></button></td></tr>`);
+            
+         document.getElementById("carritoCompra").innerHTML = html;
+        totalDinero=0;
+         carrito.forEach((n)=> totalDinero=totalDinero+n.precio);
+        
+         document.getElementById("totalCompras").innerHTML=`Total compras: ${totalDinero}`;
+
+           }
+        );
+        function borrar(indice){
+        carrito.splice(indice, 1);
+            console.log(carrito);
+            
+
+        let html = "<tr><th>Producto</th><th>Categoria</th><th>Precio</th><th>Borrar</th></tr>"; 
+         carrito.forEach((n)=> 
+         html = html + `<tr><td>${n.producto}</td><td>${n.categoria}</td><td>${n.precio}</td><td><button onclick="borrar(${carrito.indexOf(n)})"><img src='papelera-de-reciclaje.png' height='20px' width='20px'></button></td></tr>`);
+            
+         document.getElementById("carritoCompra").innerHTML = html;
+         totalDinero=0;
+         carrito.forEach((n)=> totalDinero=totalDinero+n.precio);
+        
+        document.getElementById("totalCompras").innerHTML=`Total compras: ${totalDinero}`;
+        
+        
+   
+     
+
+           }
 
     </script>
 </body>
