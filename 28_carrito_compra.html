@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+</head>
+<body>
+    
+    <h1>Bodega</h1>
+    <table id="tablaProductos"></table>
+
+    <button id="verCarrito">Carrito</button>
+    <table id="carrito"></table>
+
+
+    <script>
+        let catalogo=[
+        {producto:"pan",categoria:"Alimentación",precio:1.2},
+        {producto:"guantes",categoria:"Textil",precio:22.5},
+        {producto:"zapatos",categoria:"textil",precio:65.0},
+        {producto:"pantalla",categoria:"Informática",precio:200},
+        {producto:"teclado",categoria:"Informática",precio:35.8},
+        {producto:"leche",categoria:"Alimentación",precio:2.0}
+    ]; 
+
+        let carrito=[];
+
+    document.addEventListener("DOMContentLoaded", function(){
+        let html = "<tr><th>Producto</th><th>Categoria</th><th>Precio</th><th></th></tr>";
+        catalogo.forEach((r)=> 
+             html = html + `<tr><td>${r.producto}</td><td>${r.categoria}</td><td>${r.precio}</td><td><button onclick='agregar(${r}')>Agregar</button></td></tr>`);
+            
+
+            document.getElementById("tablaProductos").innerHTML = html;
+
+
+        }
+
+      
+    
+    );
+
+    </script>
+</body>
+</html>

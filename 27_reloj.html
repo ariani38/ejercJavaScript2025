@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div{
+        background-color: rgb(161, 177, 226);
+        color: azure;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        font-size: xx-large;
+        }
+    </style>
+</head>
+<body>
+    
+<div  id="reloj" ></div>
+
+    <script>
+        
+        setInterval(()=>{
+          let tiempo= new Date;  
+         document.getElementById("reloj").innerHTML = 
+         tiempo.getHours()+":" +tiempo.getMinutes()+ ":"+tiempo.getSeconds(), 1000
+        console.log(tiempo);
+        }
+    );
+
+    //otra forma de hacerlo del profe:
+    //para que los numeros se vean mejor en pantalla
+    /*
+        <body>
+    <h1 id="reloj"></h1>
+
+    <script>
+        setInterval(()=>{
+            cont fecha=new Date();
+            let hora=fecha.getHours();
+            let minutos=fecha.getMinutes();
+            let segundos=fecha.getSeconds();
+            if(hora<10){
+                hora="0"+hora;
+            }
+            if(minutos<10){
+                minutos="0"+minutos;
+            }
+            if(segundos<10){
+                segundos="0"+segundos;
+            }
+            document.getElementById("reloj").innerHTML=`${hora}:${minutos}:${segundos}`;
+        },500);
+
+    </script>
+</body>
+</html>
+
+    */
+        
+
+       
+     
+      
+
+
+    </script>
+
+</body>
+</html>

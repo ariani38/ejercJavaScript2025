@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //mostrar los aprobados sin utilizar for
+
+    let notas=[8.9,9,3,3,2,1,6];
+    //mostrar los aprobados
+    notas.filter(n=>n>=5)
+  
+    .forEach((n)=>console.log(n));
+
+
+    let aprobados=notas.filter(n=>n>=5)
+    console.log(aprobados);
+
+        //el .reduce reduce a un solo dato lo que le demos.
+        //ejemplo suma todos los elementos del array y deja un numero de resultado
+   let suma=notas.reduce((aux,n)=>aux+n);
+   let media=suma/notas.length;
+   console.log(`Nota media ${media}`);
+
+   //el .map se usa para realizar una funcion en cada dato del array
+   //y da como resultado un nuevo array 
+   notas=notas.map(n=>n-1);
+   console.log(notas)
+
+
+    </script>
+    
+</body>
+</html>
