@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Catálogo de productos</h1>
+    <table id="catalogo">
+
+    </table>
+    <br><br>
+    <h1>Carrito</h1>
+    <table id="carrito">
+
+    </table>
+    <br><br>
+    <div id="total">
+
+    </div>
+    <script>
+        let catalogo=[
+            {producto:"pan",categoria:"Alimentación",precio:1.2},
+            {producto:"guantes",categoria:"Textil",precio:22.5},
+            {producto:"zapatos",categoria:"Textil",precio:65.0},
+            {producto:"pantalla",categoria:"Informática",precio:200},
+            {producto:"teclado",categoria:"Informática",precio:35.8},
+            {producto:"leche",categoria:"Alimentación",precio:2.0}
+        ];
+        let carrito=[];
+        document.addEventListener("DOMContentLoaded",()=>{
+            let html="<tr><th>Producto</th><th>Categoria</th><th>Precio</th><th>Agregar</th></tr>";
+            catalogo.forEach((p,indice)=>{
+                html=html+`<tr><td>${p.producto}</td><td>${p.categoria}</td>
+                    <td>${p.precio}</td>
+                       <td> <button onclick="agregar(${indice})">Agregar</button></td></tr>`;
+            });
+            document.getElementById("catalogo").innerHTML=html;
+        });
+
+        function agregar(indice){
+            carrito.push(catalogo[indice]);
+            dibujarCarrito();
+        }
+        function dibujarCarrito(){
+            let html="<tr><th>Producto</th><th>Categoria</th><th>Precio</th></tr>";
+            carrito.forEach((p,indice)=>{
+                html=html+`<tr><td>${p.producto}</td><td>${p.categoria}</td><td>${p.precio}</td><td><button onclick="eliminar(${indice})">Eliminar</button></td></tr>`;
+            });
+            document.getElementById("carrito").innerHTML=html;
+            totalCarrito();
+        }
+        function eliminar(x){
+            carrito.splice(x,1);
+            dibujarCarrito();
+        }
+        //calcula la suma de todos los precios de productos que estén en el carrito
+        //y esa suma se mostrará en el div total
+        function totalCarrito(){
+            let suma=carrito.map(p=>p.precio) //array con los precios
+                    .reduce((aux,p)=>aux+p,0);//aqui damos un tercer parametro que es el valor inicial que es 0
+            document.getElementById("total").innerHTML=`Total:<b>${suma}</b>`;
+        }
+    </script>
+</body>
+</html>

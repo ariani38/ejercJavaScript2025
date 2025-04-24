@@ -85,11 +85,32 @@
             color: #333833;
             font-size: 20px
         }
+        select {
+            padding: 10px;
+            font-size: 16px;
+            border: 2px solid #fbfbfb;
+            border-radius: 5px;
+            background-color: #6e6e6e;
+            color: #ffffff;
+            outline: none;
+            margin: 10px 0;
+        }
+
+        input:focus, select:focus {
+            box-shadow: 0 0 10px #5b6462;
+        }
     </style>
 </head>
 <body>
     
     <h1>Catálogo de Productos</h1>
+    <p style="font-size: 1.2rem; margin: 20px 0;">Introduce una temática para buscar:</p>
+
+    <select id="categoria" style="width: 50%;">
+       
+
+    </select>
+    <button id="buscar">Buscar</button>
     <table id="tablaProductos"></table>
 
     <button id="verCarrito"> Ver Carrito</button>
@@ -116,14 +137,39 @@
         let carrito=[];
         let totalDinero=0;
 
+        //tambien se puede poner lo siguiente para q se produzca una vez que se 
+        // carga por completo la pagina
+        //document.addEventListener("DOMContentLoaded", function()etc)
+        
+        window.addEventListener("load",function(){
+         
+         let categorias= catalogo.map((n)=>n.categoria);
+         
+         let conjunto = new Set(categorias);
+         let=html="<option>Todos</option>";
+        
+         conjunto.forEach((c)=> html=html+`<option>${c}</option>`);
+                         
+          document.getElementById("categoria").innerHTML = html;
+      }
+  ); 
+
     //este evento sucede al cargarse el contenido (DOMContentLoaded)
     //y pinta la tabla desde el array catalogo
     //en el onclick se coge el indice con .indexOf
 
-    document.addEventListener("DOMContentLoaded", function(){
+    let botonBuscar=document.getElementById("buscar");
+    botonBuscar.addEventListener("click",function(){
+      //recorremos el array de datos y buscamos el json que pertenezca 
+             
+      let categoriaSeleccionada = document.getElementById("categoria").value;
+          
         let html = "<tr><th>Producto</th><th>Categoria</th><th>Precio</th><th>Agregar</th></tr>";
-        catalogo.forEach((r)=> 
-             html = html + `<tr><td>${r.producto}</td><td>${r.categoria}</td><td>${r.precio}</td><td><button onclick="agregar(${catalogo.indexOf(r)})">Agregar</button></td></tr>`);
+        catalogo.filter((r)=>r.categoria==categoriaSeleccionada||categoriaSeleccionada=="Todos")
+        .forEach((r)=> 
+             html = html + `<tr><td>${r.producto}</td><td>${r.categoria}</td>
+                <td>${r.precio}</td>
+                <td><button onclick="agregar(${catalogo.indexOf(r)})">Agregar</button></td></tr>`);
                 document.getElementById("tablaProductos").innerHTML = html;
         }
        );
@@ -153,6 +199,8 @@
            }
         );
         //borramos utilizando la posición
+        //.splice los parametros son desde donde y que cantidad de datos elimina
+        //posición es el indice, en este caso y que elimine un solo dato
         function borrar(indice){
         carrito.splice(indice, 1);
             console.log(carrito);
@@ -165,7 +213,7 @@
         //inicializo de nuevo a 0 totalDinero para q me muestre el total del carrito actual
          totalDinero=0;
          carrito.forEach((n)=> totalDinero=totalDinero+n.precio);
-        document.getElementById("totalCompras").innerHTML=`Total compras: ${totalDinero}`;
+         document.getElementById("totalCompras").innerHTML=`Total compras: ${totalDinero}`;
         
         
 

@@ -124,7 +124,7 @@
             let tematicaSeleccionada = document.getElementById("tematica").value;
             tematicaSeleccionada = tematicaSeleccionada.toLowerCase();
             let html = "<tr><th>Temática</th><th>Dirección</th></tr>";      
-          datos.filter((r)=>r.tematica==tematicaSeleccionada)
+          datos.filter((r)=>r.tematica==tematicaSeleccionada||tematicaSeleccionada==0)
             .forEach((r)=> 
              html = html + `<tr><td>${r.tematica}</td><td>${r.direccion}</td></tr>`);
             
