@@ -142,9 +142,9 @@
         //document.addEventListener("DOMContentLoaded", function()etc)
         
         window.addEventListener("load",function(){
-         
+         // se hace.map para que haga un array de categorias solamente.
          let categorias= catalogo.map((n)=>n.categoria);
-         
+         //.set para quitar los repetidos
          let conjunto = new Set(categorias);
          let=html="<option>Todos</option>";
         
