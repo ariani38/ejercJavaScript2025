@@ -83,7 +83,7 @@
         }
         div {
             text-align: center;
-            color: #333833;
+            color: #676767;
             font-size: 20px
         }
         select {
@@ -114,7 +114,7 @@
        
 
     </select>
-    <button id="buscar">Buscar</button>
+     
     <table id="tablaPaises"></table>
 
     <script>
@@ -153,12 +153,16 @@
                          
          document.getElementById("zone").innerHTML = html;
       }
-  
-      let botonBuscar=document.getElementById("buscar");
-      botonBuscar.addEventListener("click",function(){
-      //recorremos el array de datos y buscamos el json que pertenezca 
+
+      document.getElementById("zone").addEventListener("change",(event)=>{
+
+
+     // let botonBuscar=document.getElementById("buscar");
+     // botonBuscar.addEventListener("click",function(){
+     
+     //recorremos el array de datos y buscamos el json que pertenezca 
              
-      let continenteSeleccionado = document.getElementById("zone").value;
+      let continenteSeleccionado = event.target.value;
           
         let html = "<tr><th>Nombre</th><th>Capital</th><th>Población</th><th>Bandera</th></tr>";
         paises.filter((r)=>r.region==continenteSeleccionado||continenteSeleccionado=="Todos")
